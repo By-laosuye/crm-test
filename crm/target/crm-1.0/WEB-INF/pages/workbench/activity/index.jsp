@@ -7,15 +7,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 	<base href="<%=basePath%>">
 <meta charset="UTF-8">
-
 <link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 <link href="jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
-
 <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
 <script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
 <script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
-
 <script type="text/javascript">
 
 	$(function(){
@@ -86,10 +83,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						$("#createActivityModal").modal("show");
 					}
 				}
-			})
-
-
-		})
+			});
+		});
+		//当容器加载完成之后，对容器调用工具函数
+		$(".mydate").datetimepicker({
+			language:"zh-CN",//日历的语言
+			format:"yyyy-mm-dd",//日期的格式
+			minView:"month",//可以选择的最小视图
+			getInitialData:new Date(),//初始化显示日期
+			autoclose:true,//设置选择完日期或者事件之后，是否自动关闭日期，默认是false
+			todayBtn:true,//设置是否显示“今天”按钮，默认是false
+			clearBtn:true//是否显示清空按钮，默认false
+		});
 	});
 
 </script>
@@ -128,11 +133,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="form-group">
 							<label for="create-startDate" class="col-sm-2 control-label">开始日期</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-startDate">
+								<input type="text" class="form-control mydate" id="create-startDate" readonly>
 							</div>
 							<label for="create-endDate" class="col-sm-2 control-label">结束日期</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-endDate">
+								<input type="text" class="form-control mydate" id="create-endDate" readonly>
 							</div>
 						</div>
                         <div class="form-group">
