@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0/EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--设置日志输出底层执行的代码-->
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    <!--设置别名-->
+    <typeAliases>
+        <!--批量注册别名
+        别名是类名的驼峰命名规范-->
+        <package name="com.bjpowernode.crm.model"/>
+    </typeAliases>
+    <!--sql mapper(sql映射文件) 的位置-->
+    <mappers>
+        <!--单个注册-->
+        <!--<mapper resource="StudentMapper.xml"></mapper>-->
+        <!--name是包名，这个包中所有的mapper文件一次都能加载-->
+        <package name="com.bjpowernode.crm.mapper"/>
+    </mappers>
+</configuration>
