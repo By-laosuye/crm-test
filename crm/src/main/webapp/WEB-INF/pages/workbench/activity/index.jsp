@@ -21,9 +21,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	$(function(){
 		//给“创建”按钮添加单击事件
 		$("#createActivityBtn").click(function (){
-
 			//初始化
-
+			//重置表单表单
+			$("#createActivityForm").get(0).reset();
 			//弹出创建市场活动的模态窗口
 			$("#createActivityModal").modal("show");
 		})
@@ -108,7 +108,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				<div class="modal-body">
 
-					<form class="form-horizontal" role="form">
+					<form id="createActivityForm" class="form-horizontal" role="form">
 
 						<div class="form-group">
 							<label for="create-marketActivityOwner" class="col-sm-2 control-label">所有者<span style="font-size: 15px; color: red;">*</span></label>
