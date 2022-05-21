@@ -1,5 +1,6 @@
 import com.bjpowernode.crm.settings.domain.User;
 import com.bjpowernode.crm.settings.service.UserService;
+import com.bjpowernode.crm.workbench.service.ActivityService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,4 +23,5 @@ public class myTest {
         User user1 = userService.queryUserByLoginActAndPwd(map);
         System.out.println(user1);
     }*/
+
 }
