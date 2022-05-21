@@ -56,7 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var regExp = /^(([1-9]\d*)|0)$/;
 			if (!regExp.test(cost)) {
 				alert("成本只能是非负整数");
-				return;;
+				return;
 			}
 			//发送请求
 			$.ajax({
@@ -96,7 +96,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			clearBtn:true//是否显示清空按钮，默认false
 		});
 	});
-
 </script>
 </head>
 <body>
@@ -112,9 +111,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<h4 class="modal-title" id="myModalLabel1">创建市场活动</h4>
 				</div>
 				<div class="modal-body">
-
 					<form id="createActivityForm" class="form-horizontal" role="form">
-
 						<div class="form-group">
 							<label for="create-marketActivityOwner" class="col-sm-2 control-label">所有者<span style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
