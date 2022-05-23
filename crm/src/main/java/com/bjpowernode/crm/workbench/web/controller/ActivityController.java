@@ -105,4 +105,36 @@ public class ActivityController {
 
         return returnObject;
     }
+
+    @RequestMapping("/workbench/activity/queryActivityById.do")
+    @ResponseBody
+    public Object queryActivityById(String id){
+        Activity activity = activityService.queryActivityById(id);
+        return activity;
+    }
+
+    @RequestMapping("/workbench/activity/saveEditActivity.do")
+    @ResponseBody
+    public Object saveEditActivity(Activity activity,HttpSession session){
+        User user = (User) session.getAttribute(Contants.SESSION_USER);
+        //封装参数
+        activity.setEditTime(DateUtils.formateDateTime(new Date()));
+        activity.setEditBy(user.getId());
+        //调用service层方法，保存修改市场活动
+        ReturnObject returnObject = new ReturnObject();
+        try {
+            int ret = activityService.saveEditActivity(activity);
+            if (ret>0) {
+                returnObject.setCode(Contants.RETURN_OBJECT_SUCCESS);
+            }else {
+                returnObject.setCode(Contants.RETURN_OBJECT_FAIL);
+                returnObject.setMessage("系统繁忙请稍后");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            returnObject.setCode(Contants.RETURN_OBJECT_FAIL);
+            returnObject.setMessage("系统繁忙请稍后");
+        }
+        return returnObject;
+    }
 }
