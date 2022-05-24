@@ -261,7 +261,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				}
 			});
 		});
+		//给批量导出按钮添加单击事件
+		$("#exportActivityAllBtn").click(function (){
+			window.location.href="workbench/activity/exportAllActivitys.do";
+		});
 
+		//给选择导出按钮添加单击事件
+		$("#exportActivityXzBtn").click(function (){
+			//获取列表中被选中的checkbox
+			var checkIds = $("#tBody input[type='checkbox']:checked");
+			if (checkIds.size()==0){
+				alert("请选择要导出的市场活动");
+				return;
+			}
+			var ids ="";
+			$.each(checkIds,function (){
+				ids+="id="+this.value+"&";
+			});
+			ids=ids.substr(0,ids.length-1);
+			//发送请求
+			window.location.href="workbench/activity/exportXzActivity.do?"+ids+"";
+		});
 
 	});
 
