@@ -34,11 +34,11 @@ http://www.springframework.org/schema/util/spring-util.xsd">
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-    <!-- 配置文件上传解析器 id:必须是multipartResolver-->
-    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="#{1024*1024*80}"/>
+     <!--配置文件上传解析器 id:必须是multipartResolver-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="#{1024*1024*5}"/>
         <property name="defaultEncoding" value="utf-8"/>
-    </bean>-->
+    </bean>
     <mvc:interceptors>
         <mvc:interceptor>
             <!--配置拦截得请求-->

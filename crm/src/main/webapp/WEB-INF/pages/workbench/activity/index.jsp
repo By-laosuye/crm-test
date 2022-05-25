@@ -283,6 +283,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			window.location.href="workbench/activity/exportXzActivity.do?"+ids+"";
 		});
 
+		//给导入按钮添加单击事件
+		$("#importActivityBtn").click(function () {
+			var activityFileName = $("#activityFile").val();
+			var suffix = activityFileName.substr(activityFileName.lastIndexOf(".")+1).toLowerCase();
+			if (suffix != "xls"){
+				alert("只支持xls文件");
+				return;
+			}
+			var activityFile = $("#activityFile")[0].files[0];
+			if (activityFile.size>5*1024*1024){
+				alert("文件不能超过5M");
+				return;
+			}
+			var formData = new FormData();
+			formData.append("activityFile",activityFile);
+			//发送请求
+			$.ajax({
+				url:"workbench/activity/importActivity.do",
+				data:formData,
+				processData:false,//设置ajax向后台发请求之前，是否把参数统一转换成字符串，默认是true
+				contentType:false,//设置ajax向后台提交参数之前，是否把所有的参数统一按urlencoded编码。默认是true
+				type:"post",
+				dataType:"json",
+				success:function (data){
+					if (data.code=="1"){
+						//提示导入成功条数
+						alert("成功导入"+data.retData+"条记录");
+						//关闭模态窗口
+						$("#importActivityModal").modal("hide");
+						queryActivityByConditionForPage(1,$("#demo_pag1").bs_pagination('getOption','rowsPerPage'))
+					}else {
+						alert(data.message);
+						$("#importActivityModal").modal("show");
+					}
+				}
+			});
+		});
+
 	});
 
 

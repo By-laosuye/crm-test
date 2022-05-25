@@ -102,4 +102,12 @@ public interface ActivityMapper {
     List<Activity> selectActivityByIds(String[] ids);
 
 
+    /**
+     *批量保存市场活动
+     * @param activityList
+     * @return
+     */
+    int insertActivityByList(List<Activity> activityList);
+
+
 }
