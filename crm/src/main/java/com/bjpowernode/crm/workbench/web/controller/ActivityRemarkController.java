@@ -48,4 +48,54 @@ public class ActivityRemarkController {
         }
         return returnObject;
     }
+
+    @RequestMapping("/workbench/activity/deleteActivityRemarkById.do")
+    @ResponseBody
+    public Object deleteActivityRemarkById(String id){
+        ReturnObject returnObject = new ReturnObject();
+        try {
+            //调用service层方法删除备注
+            int ret = activityRemarkService.deleteActivityRemarkById(id);
+            if (ret>0) {
+                returnObject.setCode(Contants.RETURN_OBJECT_SUCCESS);
+            }else {
+                returnObject.setCode(Contants.RETURN_OBJECT_FAIL);
+                returnObject.setMessage("系统繁忙，请稍后在试");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            returnObject.setCode(Contants.RETURN_OBJECT_FAIL);
+            returnObject.setMessage("系统繁忙，请稍后在试");
+        }
+        return returnObject;
+    }
+
+
+    @RequestMapping("/workbench/activity/saveEditActivityRemark.do")
+    public @ResponseBody Object saveEditActivityRemark(ActivityRemark remark,HttpSession session){
+        User user=(User) session.getAttribute(Contants.SESSION_USER);
+        //封装参数
+        remark.setEditTime(DateUtils.formateDateTime(new Date()));
+        remark.setEditBy(user.getId());
+        remark.setEditFlag(Contants.REMARK_EDIT_FLAG_YES_EDITED);
+
+        ReturnObject returnObject=new ReturnObject();
+        try {
+            //调用service层方法，保存修改的市场活动备注
+            int ret = activityRemarkService.saveEditActivityRemark(remark);
+
+            if(ret>0){
+                returnObject.setCode(Contants.RETURN_OBJECT_SUCCESS);
+                returnObject.setRetData(remark);
+            }else{
+                returnObject.setCode(Contants.RETURN_OBJECT_FAIL);
+                returnObject.setMessage("系统忙，请稍后重试....");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            returnObject.setCode(Contants.RETURN_OBJECT_FAIL);
+            returnObject.setMessage("系统忙，请稍后重试....");
+        }
+        return returnObject;
+    }
 }
